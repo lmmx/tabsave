@@ -5,8 +5,7 @@ Super simple Chrome extension to save all files in open tabs (e.g. PDFs). Defaul
 
 Filename can also be specified as the page title by setting <code>filename</code> as <code>title</code>, in the same way that <code>url</code> from the tabs API is used for <code>url</code> in the downloads API.<br />
 
-The function <code>query{}</code> can take <a href="https://developer.chrome.com/extensions/tabs#method-query">various arguments</a>
-------
+###The function <code>query{}</code> can take <a href="https://developer.chrome.com/extensions/tabs#method-query">various arguments</a>
 
 Specifically:
 
