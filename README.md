@@ -21,7 +21,7 @@ Specifically:
 * windowType
 * index
 
-all of which (other than <code>url</code>) are optional.
+all of which are optional.
 
 ####The downloads API has <a href="https://developer.chrome.com/extensions/downloads">many more settings</a>
 
