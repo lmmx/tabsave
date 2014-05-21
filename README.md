@@ -23,4 +23,6 @@ Specifically:
 
 all of which are optional.
 
-The downloads API has <a href="https://developer.chrome.com/extensions/downloads">many more settings</a>; this extension just uses the core <code><a href="https://developer.chrome.com/extensions/downloads#method-download">download</a></code> method.
+####The downloads API has <a href="https://developer.chrome.com/extensions/downloads">many more settings</a>
+
+This extension just uses the core <code><a href="https://developer.chrome.com/extensions/downloads#method-download">download</a></code> method. Feel free to fork and make better use of it.
