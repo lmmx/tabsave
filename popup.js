@@ -2,21 +2,20 @@ function stylePop() {
 	inStyle = document.createElement('style');
 	inStyle.type = 'text/css';
 	inStyle.id = 'instyle';
-	inStyle.innerHTML = '* {font-family: "SEGOEUIL", Helvetica, Tahoma, sans-serif;} #main {width: 600px;font-size: smaller;margin: 1.5em 1.5em 0.5em 1.5em;cursor: default;line-height: 2;border: 6px solid rgba(57, 167, 153, 0.61);border-radius: 0 36px;padding: 1.5em;} #main h1 { font-weight: normal; line-height:1; font-size: 50px; margin: 0 0 0.4em 0; } #main > * { margin-left: 20px !important; } input[type="url"] { border:none; outline: none; width: 80%; } #tablist {overflow-y: scroll !important; max-height: 400px; } #tablist p { width: 97%;overflow-y: overlay;white-space: nowrap; text-overflow: ellipsis; margin:0; padding-bottom: 2px; } #tablist p:active, #tablist p:focus {text-overflow: initial; outline: none; } #p p::selection {background: #62C9BC;} div#p{overflow:auto!important; width: 100% }  a.close {-webkit-box-shadow: inset 0 0 5px 0 rgba(255,255,255,0.5);line-height: 1.1;font-size: 15px;display: block;height: 18px;-webkit-border-radius: 32px;float: right;padding: 0 4px;margin-top: -24px;-webkit-transition: all 0.4s ease-out; transition: all 0.4s ease-out;} #p p:active + .close, #p p:focus + .close {opacity: 0;} #p p:hover + .close, .close:hover {font-weight: bold;color: white;background-color: #CFCFCF; } /*Scrollbars*/  p::-webkit-scrollbar { display: none; } #textin::-webkit-scrollbar, #tablist::-webkit-scrollbar {width: 18px;} #textin::-webkit-scrollbar-track, #tablist::-webkit-scrollbar-track {background-color: transparent;} #textin::-webkit-scrollbar-thumb, #tablist::-webkit-scrollbar-thumb {border: 4px solid rgba(0, 0, 0, 0);-webkit-border-radius:16px;background-clip: padding-box;-webkit-box-shadow: inset 0 0 0px rgba(0,0,0,.3);background-color: #dadada;} #txtin::-webkit-scrollbar-corner, #tablist::-webkit-scrollbar-corner {background-color: transparent;} /* Buttons */ section {margin: 0 1.5em; height:24px; border: 3px solid transparent;}section > svg {float: left;} svg * {fill: #315C5E;} #editbtn { background: none; border: 0; outline: none; height: 27px; } #btnDL {float: right; background: rgba(57, 167, 153, 0.91);margin-top:-4px; border: 0;border-radius: 430px;color: white;font-size: 1em;outline:none;box-shadow: inset 0 0 5px 0 rgba(255,255,255,0.5);-webkit-box-shadow: inset 4px 4px 6px 0 rgba(255,255,255,0.5);padding: 5px 7px 0 7px;line-height: 1.2;text-shadow: white 0px 0px 20px, white 0px 0px 20px; -webkit-transition: all 0.4s ease-out; transition: all 0.4s ease-out;} #btnDL > svg * {fill: #FFF;} #btnDL:active, #btnDL:visited {margin-top: -4px;border: 1px solid rgba(153, 153, 153, 0.59); /*{Shadow}*/ box-shadow:inset 0 0 5px 0 #333; -moz-box-shadow:inset 0 0 5px 0 #333; -webkit-box-shadow:inset 0 1px 2px 0 #333, 0 1px 1px 0 #fff;text-shadow: none;} /* Editing */ #txtin {outline:none; border-radius:16px; width: 90%; padding:8px; border: 0; border-style: groove;background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251, 247, 255, 0.63)), color-stop(100%,rgba(229, 241, 255, 0.51)));height: 146px; margin: 0px; -webkit-transition: all 0.4s ease-out; transition: all 0.6s ease-out 0.4s; } input[type="url"] + #txtin { height: 80px; }'
 	if (navigator.appVersion.indexOf("Win")>-1) {
-    inStyle.innerHTML += " /* Font */ @font-face{ font-family: 'SEGOEUIL'; src: local('☺'), url('https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.svg') format(\"svg\"), url('https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.woff') format('woff'), url('https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.ttf') format('truetype');}";
+		inStyle.innerHTML += " /* Font */ @font-face{ font-family: 'SEGOEUIL'; src: local('☺'), url('https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.svg') format(\"svg\"), url('https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.woff') format('woff'), url('https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.ttf') format('truetype');}";
 }
 	else inStyle.innerHTML += ' /* Font */ @font-face {font-family: "SEGOEUIL";src: url(\'https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.eot\');src: local("Segoe UI Light"), url(\'https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.woff\') format("woff"), url(\'https://raw.githubusercontent.com/lmmx/websiteresources/master/fonts/SEGOEUIL.ttf\') format("truetype");}'
 	document.body.appendChild(inStyle);
 }
 
 function isURL(str) { // URL checking RegEx courtesy of Matthew O'Riordan http://blog.mattheworiordan.com/post/13174566389/url-regular-expression-for-links-with-or-without-the
-  var pattern = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/g
-  if(!pattern.test(str)) {
-    return false;
-  } else {
-    return true;
-  }
+	var pattern = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/g
+	if(!pattern.test(str)) {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 function pasteIn(e) {
@@ -28,9 +27,9 @@ function pasteIn(e) {
 			tabUrls.push(temparray[0][k]);
 		}
 		URLn = tabUrls[tabUrls.length-1];
-    if (!isURL(URLn)) {
-      (URLn == '' || URLn == ' ' || URLn == '\t') ? txt.value = null :	txt.value = URLn;
-      tabUrls.pop([tabUrls.length]);
+		if (!isURL(URLn)) {
+			(URLn == '' || URLn == ' ' || URLn == '\t') ? txt.value = null :	txt.value = URLn;
+			tabUrls.pop([tabUrls.length]);
 	}
 	else txt.value = null;
 	urlHolder = document.createElement('div');
@@ -46,43 +45,83 @@ function pasteIn(e) {
 
 function enterUp(e) {
 	if (e.keyCode === 13) {
-		console.log("Logging this one");
 		pasteIn();
 	}
 }
 
+function doiinput() {
+	document.querySelector('#main h1').innerText = 'Enter DOIs';
+	document.querySelector('#doibtn').remove();
+}
+
+closeSVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 785.714 1000" preserveAspectRatio="xMinYMin meet" width="100%" height="100%"><path d="M724.284 737.74q0 22.32 -15.624 37.944l-75.888 75.888q-15.624 15.624 -37.944 15.624t-37.944 -15.624l-164.052 -164.052 -164.052 164.052q-15.624 15.624 -37.944 15.624t-37.944 -15.624l-75.888 -75.888q-15.624 -15.624 -15.624 -37.944t15.624 -37.944l164.052 -164.052 -164.052 -164.052q-15.624 -15.624 -15.624 -37.944t15.624 -37.944l75.888 -75.888q15.624 -15.624 37.944 -15.624t37.944 15.624l164.052 164.052 164.052 -164.052q15.624 -15.624 37.944 -15.624t37.944 15.624l75.888 75.888q15.624 15.624 15.624 37.944t-15.624 37.944l-164.052 164.052 164.052 164.052q15.624 15.624 15.624 37.944z"></path></svg>'
+/*
+function getpagelinks(target) {
+	targetTag = target;
+	tagCount = {}; getTagUrls = {}; allTagUrls = [];
+	tagCount['code'] = 'document.body.querySelectorAll("'+targetTag+'").length';
+	eachTagUrl['code'] = 'document.querySelectorAll("'+targetTag'")['+t+']';
+	chrome.tabs.executeScript(null, tagCount, function(results){
+		numPageTags = results[0];
+		for (t=0;t<numPageTags;t++) {
+			chrome.tabs.executeScript(null, eachTagUrl, function(results) {
+				allTagUrls.push(results[0]);
+			});
+		}
+	} );
+}
+*/
 function urlGet(){
-    tabUrls = [];
-chrome.tabs.query({currentWindow: true, active: false}, function(tabs){
-    var div = document.createElement('div');
+		tabUrls = [];
+chrome.tabs.query({currentWindow: true}, function(tabs){
+		var div = document.createElement('div');
 for (i=0;i<tabs.length;i++) {
-    tabUrls.push(tabs[i].url);
+		tabUrls.push(tabs[i].url);
 } 
-    header = document.createElement('h1');
-    header.innerHTML = 'Tabs to download';
-    list = document.createElement('div');
+		header = document.createElement('h1');
+		header.innerHTML = 'Tabs to download';
+		list = document.createElement('div');
 	list.id = 'tablist';
-    list.innerHTML = tabUrls.join('</p><a class="close">&times;</a></div><div id="p"><p contenteditable>').replace(/^/,'<div id="p"><p contenteditable>').replace(/$/,'</p><a class="close">&times;</a></div>');
-    div.innerHTML = header.outerHTML + list.outerHTML;
-    div.id = 'main';
-    document.body.appendChild(div);
-    
+		list.innerHTML = tabUrls.join('</p><a class="close">'+closeSVG+'</a></div><br /><div id="p"><p>').replace(/^/,'<div id="p"><p>').replace(/$/,'</p><a class="close">'+closeSVG+'</a></div>');
+		paras = list.querySelectorAll('p');
+		for (i=0;i<paras.length;i++) {
+			paras[i].addEventListener('click', function(e) { //doesn't work
+				console.log("hi")
+				this.setAttribute('contenteditable','');
+				console.log(this);
+			});
+		}
+		div.innerHTML = header.outerHTML + list.outerHTML;
+		div.id = 'main';
+		document.body.appendChild(div);
+
+		
 	formsect = document.createElement('section');
 	editbtn = document.createElement('button');
 	editSVG = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 600 600" enable-background="new 0 0 600 600" xml:space="preserve" xmlns:xml="http://www.w3.org/XML/1998/namespace"><g xmlns="http://www.w3.org/2000/svg" transform="translate(700, 0) scale(-1, 1)"><path fill="#404040" d="M222.29,43.907c8.002,0,16.004,0,24.008,0c17.984,5.355,34.246,12.437,46.018,24.009 c-37.514,40.516-78.527,77.527-116.042,118.04c-14.398-9.606-19.908-28.114-26.006-46.017c0-8.005,0-16.008,0-24.011 C158.911,76.563,182.918,52.555,222.29,43.907z"></path><path fill="#404040" d="M322.325,101.928c66.083,59.522,129.868,127.868,196.07,194.071c20.882,20.882,50.497,41.409,64.025,64.023 c17.16,28.683,26.672,65.598,40.013,98.032c13.145,31.96,26.889,64.208,40.017,98.039c-33.778-13.111-66.171-26.906-98.034-40.019 c-32.584-13.395-69.32-22.832-98.037-40.013c-22.408-13.406-45.211-43.211-66.023-64.021 c-63.788-63.786-128.009-130.914-192.067-192.069C243.131,177.457,285.814,142.774,322.325,101.928z M524.398,418.042 c-26.342-11.761-47.98,8.89-48.018,36.017c38.498,14.85,74.458,32.241,114.037,46.012c5.916-5.428,13.42-9.254,16.01-18.006 c-14.952-37.733-30.96-74.41-46.02-112.039C533.29,370.06,512.638,391.702,524.398,418.042z"></path></g></svg>';
 	editbtn.innerHTML = editSVG;
 	editbtn.id = 'editbtn';
+	DOIbtn = document.createElement('button');
+	DOIbtn.id = 'doibtn';
+	PDFsvg = '<svg class="pdficon" width="14.600000000000001" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <g> <g id="svg_3"> <g id="svg_2"> <g id="svg_1"> <g fill="white" transform="matrix(0.0318612 0 0 0.0311698 16.2223 -89.3014)" id="g1552"> <path fill="#F18585" fill-rule="evenodd" stroke-width="0.95407495pt" id="path1543" d="m-504.14551,2871.42969c0,166.802 0,333.604 0,500.40625c149.34375,0 298.68747,0 448.03128,0c0,-125.2605 0,-250.521 0,-375.78125c-37.45105,-42.0896 -74.88874,-84.19238 -112.375,-126.25c-111.88541,0 -223.77084,0 -335.65619,0c0,0.33325 0,1.4165 0,1.625l-0.00006,0l-0.00003,0z"></path> </g> <path fill="#FFECDD" fill-rule="evenodd" stroke-width="0.95407495pt" id="path906" d="m14.53847,3.92331c-1.0588,-0.31347 -2.43077,-0.26901 -3.4672,-0.09036c0.17896,-1.14829 0.20131,-2.58734 -0.04474,-3.758l3.51193,3.84835l0.00001,0l0,0.00001z"></path> <path fill="#FFFFFF" id="path900" d="m6.93574,1.26566c-0.34422,0.05049 -0.53274,0.18698 -0.69184,0.76482c-0.15908,0.57786 -0.00517,1.61811 0.21322,2.41611c0.08959,0.26548 0.20604,0.52232 0.30926,0.78419c-0.05892,0.39499 -0.13058,0.78987 -0.23194,1.17812c-0.38674,1.58543 -0.82627,3.17933 -1.48739,4.67568c-0.92081,0.45271 -1.81601,0.95412 -2.6655,1.52788c-0.51235,0.32121 -1.45011,1.22294 -0.58906,1.69724c0.48353,0.27411 0.98677,0.2187 1.4432,0c0.22821,-0.10936 0.44362,-0.26241 0.64061,-0.43075c0.19701,-0.16835 0.37702,-0.35302 0.52648,-0.53753c0.46051,-0.58045 0.85585,-1.20058 1.20389,-1.84819c1.37958,-0.6201 2.80398,-1.14188 4.27068,-1.50578c0.6133,0.53513 1.51235,1.07404 2.27525,0.54121c0.76482,-0.3484 0.63662,-1.38213 -0.23562,-1.39533c-0.57821,-0.11506 -1.15226,-0.04397 -1.71933,0.08468c-0.24718,-0.28427 -0.47664,-0.58994 -0.68847,-0.87622c-0.683,-1.08654 -1.31318,-2.20603 -1.90342,-3.3466c0.15991,-1.04604 0.32391,-2.20929 0.19561,-2.96528c-0.12828,-0.75602 -0.49818,-0.81812 -0.86568,-0.76421l0,0l0,0l0.00004,-0.00001l0.00002,-0.00002l-0.00001,-0.00001zm-0.11413,0.78417c0.09276,-0.20569 0.33182,0.01223 0.3277,0.28748c-0.00411,0.27525 -0.04785,0.89147 -0.24302,1.06367c-0.14578,-0.4458 -0.17744,-1.14548 -0.08468,-1.35115zm0.50806,4.44006c0.53693,1.07153 1.18873,2.0849 2.00282,2.96003c-0.23992,0.0692 -0.48478,0.13484 -0.72159,0.19513c-0.87421,0.27909 -1.73097,0.61428 -2.57346,0.98298c0.59848,-1.31659 0.99356,-2.72287 1.29225,-4.13814l-0.00001,0l-0.00001,0zm3.70005,3.29138c0.30804,-0.00296 0.55406,0.07552 0.49335,0.36817c-0.25967,-0.06632 -0.48591,-0.19277 -0.6995,-0.34607c0.06983,-0.00712 0.13984,-0.02146 0.20617,-0.02208l-0.00001,0l-0.00001,-0.00001l0,-0.00001zm-6.41341,2.17954c-0.0656,0.12525 -0.1181,0.25588 -0.18776,0.3792c-0.44196,0.67757 -1.08139,1.52879 -1.96232,1.51315c-0.26311,-0.73867 0.81539,-1.15052 1.31802,-1.48371c0.27394,-0.14243 0.55427,-0.27276 0.83205,-0.40867l0,0l0,0l0.00001,0l0,0.00001l0,0.00002z"></path> </g> </g> </g> </g> </svg>'
+	DOIbtn.innerHTML = PDFsvg + 'DOI entry <sup alt="DOIs are unique identifiers for academic papers - click here to download PDFs from Google Scholar using a list of DOIs and/or URLs" (papers will be named in APA format>?</sup>';
 	btn = document.createElement('button');
-	dlSVG = '<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="12px" height="18px" viewBox="0 0 23 35" preserveAspectRatio="xMidYMid meet"><g transform="scale(0.02)"><g transform="translate(0.000000,1750.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M3170 11440 l0 -5700 -1502 0 -1503 0 2798 -2797 2797 -2798 2797 2798 2798 2797 -1503 0 -1502 0 0 5700 0 5700 -2590 0 -2590 0 0 -5700z"></path></g></g></svg>'
-  btn.innerHTML = dlSVG;
-	btn.id = 'dlbtn';
-  btn.setAttribute('id','btnDL');
-  formsect.innerHTML = editbtn.outerHTML + btn.outerHTML;
-  document.body.appendChild(formsect);
+	dlSVG = '<svg id="dlsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082.5 1000" preserveAspectRatio="xMinYMin meet" width="100%" height="100%"><path d="m1.5 597.7q0 104.4 72.7 179.2t177.3 79.5q9.2 0 9.2-8.7v-69.9q0-9.2-9.2-9.2q-66.9-3.5-114-53.3t-47.2-117.6q0-65 44.5-113.1t109.8-55.9l27.4-1.5q9.7 0 9.7-8.7l3.9-28.9q7.9-84.4 71.3-141.3t149.4-56.9q85 0 148.7 56.9t72.5 141.3l3.9 30.3q0 8.8 9.3 8.8h84q69.3 0 120.4 50.3t51 118.7q0 67.8-47.1 117.6t-114 53.3q-10.3 0-10.3 9.2v69.9q0 8.7 10.3 8.7q104-3.4 176.2-78.6t72.3-180.1q0-70.4-34.7-129.4t-94.2-93.1t-129.9-33.9h-16.6q-25.4-104.5-109.6-171.4t-192.2-66.9q-110.3 0-196 68.4t-110.1 175.3q-85.9 20-142.3 90.6t-56.4 160.4z m362.8 79.5q0 18.1 13.1 31.3l134.3 135.7q9.8 12.2 30.3 12.2q22 0 31.7-12.2l134.8-135.7q13.2-14.2 13.2-31.3q0-18-13-30.2t-31.5-12.2t-32.2 12.2l-58.6 57.6v-207.5q0-18.6-12.9-30.8t-31.5-12.2t-30.8 12.2t-12.2 30.8v207.5l-57.6-57.6q-13.7-12.2-32.2-12.2q-19.6 0-32.2 11.9t-12.7 30.5z"></path></svg>'
+	btn.innerHTML = dlSVG;
+	btn.setAttribute('id','btnDL');
+	formsect.innerHTML = editbtn.outerHTML + DOIbtn.outerHTML + btn.outerHTML;
+	document.body.appendChild(formsect);
+	document.querySelector('#doibtn').addEventListener('click', function(e) {
+	if (document.querySelector('#editbtn') !== null) {
+		document.querySelector('#editbtn').click();
+		doiinput();
+		}
+	else doiinput();
+	});
 	document.querySelector('#btnDL').addEventListener('click', function(e) {
 		tabDL();
 	})
-  document.querySelector('#editbtn').addEventListener('click', function(e) {
+	document.querySelector('#editbtn').addEventListener('click', function(e) {
 	textarea = document.createElement('textarea');
 	textarea.id = 'txtin'
 	edHead = document.createElement('h1');
@@ -90,30 +129,98 @@ for (i=0;i<tabs.length;i++) {
 	div.childNodes[0].outerHTML = edHead.outerHTML;
 	div.childNodes[1].outerHTML = textarea.outerHTML;
 
-	document.querySelector('textarea').addEventListener('paste', pasteIn, false);
-	document.querySelector('textarea').addEventListener('keyup', enterUp, false);
+	document.querySelector('textarea').addEventListener('paste', pasteIn);
+	document.querySelector('textarea').addEventListener('keyup', enterUp);
 	this.remove();
 	document.querySelector('textarea').focus();
-	}, false);
+	});
 	document.querySelector('#btnDL').focus();
-	
+
+	closers = document.querySelectorAll('#p');
+	for (c=0;c<closers.length;c++) {
+		closers[c].querySelector('.close').addEventListener('click',function(e) {
+			if (document.querySelectorAll('#p').length > 1) {
+				this.parentNode.nextSibling.remove();
+				this.parentNode.remove();
+			}
+			else this.parentNode.querySelector('p').innerText = '';
+		})
+		closers[c].querySelector('p').addEventListener('mouseover',function(e) {
+			this.setAttribute('contenteditable','true');
+		})
+	}
 });
 
-closers = document.querySelectorAll('.close');
-	for (c=0;c<closers.length;c++) {
-		closers[i].addEventListener('click',function(e) {
-			alert("hello?")
-			this.parentNode.parentNode.remove();
-			alert("hello!");
-		}, false)
-	}
 
+console.log(document.activeElement);
+
+}
+
+function getAPA(data) {
+	bibtree = JSON.parse(JSON.stringify(data));
+	bibdata = bibtree.data[0].scholar[0];
+	APAciteprep = bibdata.citedSources.citations[0].bibliographyText;
+	APAcite = APAciteprep.substr(0,APAciteprep.indexOf(',')) + APAciteprep.substr(APAciteprep.indexOf('(')-1,7) + APAciteprep.substr(APAciteprep.indexOf(')')+2).substr(0, APAciteprep.substr(APAciteprep.indexOf(')')+2).indexOf('.'));
+}
+
+function bibli(info) {
+	try {
+		getAPA(info);
+		chrome.downloads.download({url: originalURL, filename: APAcite});
+	}
+	catch(e) {
+	    doiRE = /\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\b/g;
+		if (originalURL.indexOf(doiRE)>-1) {
+			possDOIurl = APIpre + doiRE.exec(originalURL)[1] + APIsuff;
+			bibliscript = document.createElement('script');
+			bibliscript.type = 'text/javascript';
+			bibliscript.src = possDOIurl;
+			document.head.appendChild(bibliscript);
+			getAPA(info);
+			chrome.downloads.download({url: originalURL, filename: APAcite});
+		}
+
+		else if (originalURL.match(/\.pdf\+html/) !== null) {
+			try {
+				stripAPIurl = APIpre + originalURL.replace(/.pdf\+html/,'.pdf') + APIsuff;
+				bibliscript = document.createElement('script');
+				bibliscript.type = 'text/javascript';
+				bibliscript.src = stripAPIurl;
+				document.head.appendChild(bibliscript);
+				getAPA(info);
+				chrome.downloads.download({url: originalURL, filename: APAcite});
+			}
+			catch (e) {
+				chrome.downloads.download({url: originalURL});
+			}
+		}
+
+		else chrome.downloads.download({url: originalURL})
+	}
 }
 
 function tabDL(){
-  for (i=0;i<tabUrls.length;i++) {
-    chrome.downloads.download({url: tabUrls[i]});
-}
+	for (i=0;i<tabUrls.length;i++) {
+		if (tabUrls[i].indexOf('pdf')>-1) {
+			originalURL = tabUrls[i];
+			APIpre = 'https://www.googleapis.com/scribe/v1/research?query=';
+			APIsuff = '&key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&callback=bibli';
+			if (tabUrls[i].indexOf('ac.els-cdn.com')>-1) {
+				SIid = tabUrls[i].match(/ac.els-cdn.com\/(.*?)\//)[1];
+				SIurl = 'http://www.sciencedirect.com/science/article/pii/'+SIid;
+				queryUrl = SIurl;
+			}
+			else queryUrl = tabUrls[i];
+			APIurl = APIpre + queryUrl + APIsuff;
+
+			bibliscript = document.createElement('script');
+			bibliscript.type = 'text/javascript';
+			bibliscript.src = APIurl;
+			document.head.appendChild(bibliscript);
+			//bibli callback provides the metadata for this URL asynchronously
+		}
+		else chrome.downloads.download({url: tabUrls[i]});
+	}
 }
 document.addEventListener('DOMContentLoaded', function () {
 	stylePop();
