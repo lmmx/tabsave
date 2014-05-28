@@ -154,15 +154,14 @@
 		outline: none;
 		height: 27px;
 	}
+	
+	section button {
+		cursor: pointer;
+	}
 
 	#doibtn {
 		color: #f18585;
-		font-family: monospace;
 		vertical-align: super;
-	}
-
-	#doibtn sup {
-		font-family: monospace;
 	}
 
 	#doibtn svg {
@@ -170,7 +169,7 @@
 		padding-right: 5px;
 	}
 
-	#doibtn > sup::after {
+	#doibtn sup::after {
 		padding: 4px;
 		pointer-events: none;
 		content: ""attr(alt)"";
@@ -184,14 +183,55 @@
 		right: 225px;
 		color: white;
 		-webkit-transition: all 0.8s ease-out 0.2s;
-		width: hidden;
 	}
 
-	#doibtn > sup:hover::after {
+	#doibtn sup:hover::after {
 		opacity: 1;
 		margin-right: 0;
 		width: 200px;
 		-webkit-transition: all 0.8s ease-out 0.5s;
+	}
+
+	#doibtn {
+		white-space: nowrap;
+		text-align: left;
+		width: 24px;
+		-webkit-transition: all 0.4s ease-out;
+		transition: all 0.8s ease-out 1s;
+		overflow: visible;
+	}
+	
+	#doibtn, #doibtn * {
+		font-family: monospace;
+	}
+	
+	#doibtn:hover {
+		width: 125px;
+		-webkit-transition: width 0.8s ease-out 0.4s;
+	}
+
+	#doibtn sup {
+		position: relative;
+		top: -17px;
+		padding-left: 7px;
+		cursor: help;
+		overflow: hidden;
+		top: -20px !important;
+		opacity: 0;
+		pointer-events: none;
+		-webkit-transition: all 0.5s ease-out 1.4s;
+	}
+	
+	#doibtn:hover sup {
+		opacity: 1;
+		top: -4px !important;
+		pointer-events: all;
+	}
+
+	#doibtn sup::after {
+		white-space: initial;
+		text-align: center;
+		right: -15rem;
 	}
 
 	#btnDL {
