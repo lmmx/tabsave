@@ -1,12 +1,14 @@
-Tabsave
+Tab Save
 =======
 
-Simple Chrome extension to save all files in open tabs (e.g. PDFs) to disk. Default setting is <code>currentWindow:true</code>, i.e. all open tabs in the current window will be saved to disk, but this setting could be changed for all windows, in/active tabs etc..
+Tab Save is a utility to save all files in open tabs within Google Chrome to disk.
 
-Filename can also be specified as the page title by setting <code>filename</code> as <code>title</code>, in the same way that <code>url</code> from the tabs API is used for <code>url</code> in the downloads API, though this doesn't work for PDF files which were my original target so I didn't use it.<br />
+![](https://raw.githubusercontent.com/lmmx/tabsave/master/TS%20demo%20wide.png)
 
-####The downloads API has <a href="https://developer.chrome.com/extensions/downloads">many more settings</a> than used here
+All open tabs in the current window are saved to disk, but I might add the ability to change this behaviour on the options page, e.g. for *all* windows, in/active tabs etc..
 
-This extension just uses the core <code><a href="https://developer.chrome.com/extensions/downloads#method-download">download</a></code> method. Feel free to fork and make more elaborate use of it. I'd like to add boxes to decide the name for files, e.g. for PDFs, and it would be possible to get bibliographic data from inside the tabs to do so if anyone wanted to develop this idea further.
+Filename can also be specified as the page title by setting <code>filename</code> in the chrome.download API. Hooking this up to a Google Scholar API will allow this extension to automatically name PDF files - this code contains a working prototype but the finished product is still in the works.
 
-Working browser extension <a href="https://chrome.google.com/webstore/detail/tab-save/lkngoeaeclaebmpkgapchgjdbaekacki">is available on the Chrome web store</a>, and now features the ability to add a list manually rather than just from the tabs list.
+This extension largely just uses the core <code><a href="https://developer.chrome.com/extensions/downloads#method-download">download</a></code> method. Feel free to fork and make more elaborate use of it.
+
+The current build <a href="https://chrome.google.com/webstore/detail/tab-save/lkngoeaeclaebmpkgapchgjdbaekacki">is available on the Chrome web store</a>, and now features the ability to add a list manually rather than just from the tabs list.
