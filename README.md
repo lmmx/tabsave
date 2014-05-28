@@ -1,28 +1,14 @@
-Tabsave
+Tab Save
 =======
 
-Super simple Chrome extension to save all files in open tabs (e.g. PDFs). Default setting is <code>currentWindow:true, active: true</code>, i.e. all *other* open tabs will be saved to disk.
+Tab Save is a utility to save all files in open tabs within Google Chrome to disk.
 
-Filename can also be specified as the page title by setting <code>filename</code> as <code>title</code>, in the same way that <code>url</code> from the tabs API is used for <code>url</code> in the downloads API.<br />
+![](https://raw.githubusercontent.com/lmmx/tabsave/master/TS%20demo%20wide.png)
 
-####The function <code>query{}</code> can take <a href="https://developer.chrome.com/extensions/tabs#method-query">various arguments</a>
+All open tabs in the current window are saved to disk, but I might add the ability to change this behaviour on the options page, e.g. for *all* windows, in/active tabs etc..
 
-Specifically:
+Filename can also be specified as the page title by setting <code>filename</code> in the chrome.download API. Hooking this up to a Google Scholar API will allow this extension to automatically name PDF files - this code contains a working prototype but the finished product is still in the works.
 
-* active
-* pinned
-* highlighted
-* currentWindow
-* lastFocusedWindow
-* status
-* title
-* url
-* windowId
-* windowType
-* index
+This extension largely just uses the core <code><a href="https://developer.chrome.com/extensions/downloads#method-download">download</a></code> method. Feel free to fork and make more elaborate use of it.
 
-all of which are optional.
-
-####The downloads API has <a href="https://developer.chrome.com/extensions/downloads">many more settings</a>
-
-This extension just uses the core <code><a href="https://developer.chrome.com/extensions/downloads#method-download">download</a></code> method. Feel free to fork and make better use of it.
+The current build <a href="https://chrome.google.com/webstore/detail/tab-save/lkngoeaeclaebmpkgapchgjdbaekacki">is available on the Chrome web store</a>, and now features the ability to add a list manually rather than just from the tabs list.

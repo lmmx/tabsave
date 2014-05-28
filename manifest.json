@@ -2,14 +2,27 @@
   "manifest_version": 2,
 
   "name": "Tab Save",
-  "description": "This extension downloads files in open tabs.",
-  "version": "1.0",
+  "description": "One-click download for files from open tabs, lists of URLs, or scholarly article PDFs from their associated DOI.",
+
+  "version": "1.4.0.0",
+  "icons": {
+  	"16": "icon16.png",
+	"48": "icon48.png",
+	"128": "icon128.png"
+  },
+	"homepage_url": "https://github.com/lmmx/tabsave",
 
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
+	"author": "Louis Maddox",
+	"omnibox": {
+		"keyword": "tabsave"
+	},
   "permissions": [
     "downloads", "tabs", "<all_urls>"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' https://www.googleapis.com; object-src 'self'",
+  "options_page": "options.html"
 }

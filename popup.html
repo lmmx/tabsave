@@ -2,10 +2,292 @@
 <html>
   <head>
     <style>
-      body {
-        min-width: 357px;
-        overflow-x: hidden;
-      }
+	body {
+		min-width: 357px;
+		overflow-x: hidden;
+	}
+	* {
+		font-family: "SEGOEUIL", Helvetica, Tahoma, sans-serif;
+	}
+
+	#main {
+		width: 600px;
+		font-size: smaller;
+		margin: 1.5em 1.5em 0.5em 1.5em;
+		cursor: default;
+		line-height: 0;
+		border: 6px solid rgba(57, 167, 153, 0.61);
+		border-radius: 0 36px;
+		padding: 1.5em;
+	}
+
+	#main::selection, #main *::selection {
+		background-color: transparent;
+	}
+
+	#main h1 {
+		font-weight: normal;
+		line-height: 1 !important;
+		font-size: 50px;
+		margin: 0 0 0.4em 0;
+	}
+
+	#main > * {
+		margin-left: 20px !important;
+	}
+
+	input[type="url"] {
+		border: none;
+		outline: none;
+		width: 80%;
+	}
+
+	#tablist {
+		overflow-y: scroll !important;
+		max-height: 400px;
+	}
+
+	#tablist p {
+		width: 97%;
+		height: 1.6rem;
+		cursor: auto;
+		overflow-y: overlay;
+		white-space: nowrap;
+		margin: 0;
+		padding-bottom: 2px;
+	}
+
+	#tablist p:active, #tablist p:focus {
+		text-overflow: initial;
+		outline: none;
+	}
+
+	#p p::selection {
+		background: #62C9BC;
+	}
+
+	div#p {
+		overflow: auto!important;
+		width: 100%;
+		line-height: 2 !important;
+	}
+
+	a.close {
+		-webkit-box-shadow: inset 0 0 5px 0 rgba(255,255,255,0.5);
+		line-height: 1.1 !important;
+		font-size: 15px;
+		display: block;
+		height: 18px;
+		-webkit-border-radius: 32px;
+		float: right;
+		padding: 0 4px;
+		margin-top: -24px;
+		-webkit-transition: all 0.4s ease-out;
+		transition: all 0.4s ease-out;
+	}
+
+	.close svg {
+		width: 10px;
+		height: 10px;
+		fill: #CFCFCF;
+		-webkit-transition: all 0.4s ease-out;
+		transition: all 0.4s ease-out;
+	}
+
+	#p p:active + .close, #p p:focus + .close {
+		opacity: 0;
+	}
+
+	#p p:hover + .close svg, .close:hover svg {
+		fill: #51C0CF;
+	}
+
+/*Scrollbars*/
+
+	p::-webkit-scrollbar {
+		display: none;
+	}
+
+	#textin::-webkit-scrollbar, #tablist::-webkit-scrollbar {
+		width: 18px;
+	}
+
+	#textin::-webkit-scrollbar-track, #tablist::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+	#textin::-webkit-scrollbar-thumb, #tablist::-webkit-scrollbar-thumb {
+		border: 4px solid rgba(0, 0, 0, 0);
+		-webkit-border-radius: 16px;
+		background-clip: padding-box;
+		-webkit-box-shadow: inset 0 0 0px rgba(0,0,0,.3);
+		background-color: #dadada;
+	}
+
+	#txtin::-webkit-scrollbar-corner, #tablist::-webkit-scrollbar-corner {
+		background-color: transparent;
+	}
+
+/* Buttons */
+
+	section {
+		margin: 0 1.5em;
+		height: 24px;
+		border: 3px solid transparent;
+	}
+
+	section > svg {
+		float: left;
+	}
+
+	#editbtn {
+		margin-right: 60px;
+	}
+
+	#editbtn svg * {
+		fill: #315C5E;
+	}
+
+	#editbtn, #doibtn {
+		background: none;
+		border: 0;
+		outline: none;
+		height: 27px;
+	}
+	
+	section button {
+		cursor: pointer;
+	}
+
+	#doibtn {
+		color: #f18585;
+		vertical-align: super;
+	}
+
+	#doibtn svg {
+		vertical-align: sub !important;
+		padding-right: 5px;
+	}
+
+	#doibtn sup::after {
+		padding: 4px;
+		pointer-events: none;
+		content: ""attr(alt)"";
+		display: block;
+		position: absolute;
+		bottom: 10px;
+		opacity: 0;
+		width: 200px;
+		margin-right: -40px;
+		background: rgba(241, 133, 133, 0.85);
+		right: 225px;
+		color: white;
+		-webkit-transition: all 0.8s ease-out 0.2s;
+	}
+
+	#doibtn sup:hover::after {
+		opacity: 1;
+		margin-right: 0;
+		width: 200px;
+		-webkit-transition: all 0.8s ease-out 0.5s;
+	}
+
+	#doibtn {
+		white-space: nowrap;
+		text-align: left;
+		width: 24px;
+		-webkit-transition: all 0.4s ease-out;
+		transition: all 0.8s ease-out 1s;
+		overflow: visible;
+	}
+	
+	#doibtn, #doibtn * {
+		font-family: monospace;
+	}
+	
+	#doibtn:hover {
+		width: 125px;
+		-webkit-transition: width 0.8s ease-out 0.4s;
+	}
+
+	#doibtn sup {
+		position: relative;
+		top: -17px;
+		padding-left: 7px;
+		cursor: help;
+		overflow: hidden;
+		top: -20px !important;
+		opacity: 0;
+		pointer-events: none;
+		-webkit-transition: all 0.5s ease-out 1.4s;
+	}
+	
+	#doibtn:hover sup {
+		opacity: 1;
+		top: -4px !important;
+		pointer-events: all;
+	}
+
+	#doibtn sup::after {
+		white-space: initial;
+		text-align: center;
+		right: -15rem;
+	}
+
+	#btnDL {
+		float: right;
+		background: white;
+		margin-top: -4px;
+		margin-bottom: 5px;
+		border: 0;
+		border-radius: 430px;
+		color: white;
+		padding: 1px 3px;
+		font-size: 1em;
+		outline: none;
+		box-shadow: inset 2px 2px 6px 0 rgba(255,255,255,0.5);
+		-webkit-box-shadow: inset 2px 2px 6px 0 rgba(255,255,255,0.5);
+		-webkit-transition: all 0.4s ease-out;
+	}
+
+	#btnDL:active, #btnDL:visited {
+		margin-top: -3px;
+		margin-bottom: 4px;
+		box-shadow: inset 0 -1px 1px 0 #7E7E7E, 0 2px 13px 0 #fff;
+		-webkit-box-shadow: inset 0 -1px 1px 0 #7E7E7E, 0 2px 13px 0 #fff;
+		text-shadow: none;
+	}
+
+	#dlsvg {
+		width: 37px;
+		height: 36px;
+	}
+
+	#dlsvg * {
+		fill: #39A799;
+		width: 20px;
+		height: 26px;
+	}
+
+/* Editing */
+
+	#txtin {
+		outline: none;
+		border-radius: 16px;
+		width: 90%;
+		padding: 8px;
+		border: 0;
+		border-style: groove;
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(251, 247, 255, 0.63)), color-stop(100%,rgba(229, 241, 255, 0.51)));
+		height: 146px;
+		margin: 0px;
+		-webkit-transition: all 0.4s ease-out;
+		transition: all 0.6s ease-out 0.4s;
+	}
+
+	input[type="url"] + #txtin {
+		height: 80px;
+	}
     </style>
 
     <!--
