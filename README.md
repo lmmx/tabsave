@@ -1,4 +1,4 @@
-Tabsave
+Tab Save
 =======
 
 Tab Save is a utility to save all files in open tabs within Google Chrome to disk.
