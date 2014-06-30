@@ -174,8 +174,8 @@ function urlGet(){
 	for (c=0;c<closers.length;c++) {
 		closers[c].querySelector('.close').addEventListener('click',function(e) {
 			if (document.querySelectorAll('#p').length > 1) {
-				dataOrigin = this.parentNode.getAttribute('data-origin');
-				urlIndex = tabUrls.indexOf(dataOrigin);
+				var dataOrigin = this.parentNode.getAttribute('data-origin');
+				var urlIndex = tabUrls.indexOf(dataOrigin);
 				if (urlIndex > -1) { tabUrls.splice(urlIndex, 1) }
 				else console.log("original URL not found in array - this shouldn't happen");
 				this.parentNode.nextSibling.remove();
@@ -196,63 +196,75 @@ function urlGet(){
 }
 
 function getAPA(data) {
-	bibtree = JSON.parse(JSON.stringify(data));
-	bibdata = bibtree.data[0].scholar[0];
-	APAciteprep = bibdata.citedSources.citations[0].bibliographyText;
-	APAcite = APAciteprep.substr(0,APAciteprep.indexOf(',')) + APAciteprep.substr(APAciteprep.indexOf('(')-1,7) + APAciteprep.substr(APAciteprep.indexOf(')')+2).substr(0, APAciteprep.substr(APAciteprep.indexOf(')')+2).indexOf('.'));
+	var bibtree = JSON.parse(JSON.stringify(data));
+	var bibdata = bibtree.data[0].scholar[0];
+	var APAciteprep = bibdata.citedSources.citations[0].bibliographyText;
+	var APAcite = APAciteprep.substr(0,APAciteprep.indexOf(',')) + APAciteprep.substr(APAciteprep.indexOf('(')-1,7) + APAciteprep.substr(APAciteprep.indexOf(')')+2).substr(0, APAciteprep.substr(APAciteprep.indexOf(')')+2).indexOf('.'));
+	var APAcite = APAcite.replace('/','-');
 }
 
 function bibli(info) {
+	var queried = info.data[0].groupResult.query;
+	if (queried.indexOf('sciencedirect.com')<0){
+		var originalquery = queried;
+	}
+else {
+	// get SIid back out of query, then look through SI_codes for the (PDF) source URL to use for the download
+	for (s=0;s<SI_codes.length;s++) {
+		if (SI_codes[s][0] == queried) {
+			var originalquery = SI_codes[s][1];
+		}
+	}
+}
 	try {
 		getAPA(info);
-		chrome.downloads.download({url: originalURL, filename: APAcite});
+		chrome.downloads.download({url: originalquery, filename: APAcite});
 	}
 	catch(e) {
 	    doiRE = /\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\b/g;
-		if (originalURL.indexOf(doiRE)>-1) {
-			possDOIurl = APIpre + doiRE.exec(originalURL)[1] + APIsuff;
-			bibliscript = document.createElement('script');
+		if (originalquery.indexOf(doiRE)>-1) {
+			console.log(originalquery);
+			var possDOIurl = APIpre + doiRE.exec(originalquery)[1] + APIsuff;
+			var bibliscript = document.createElement('script');
 			bibliscript.type = 'text/javascript';
 			bibliscript.src = possDOIurl;
 			document.head.appendChild(bibliscript);
-			getAPA(info);
-			chrome.downloads.download({url: originalURL, filename: APAcite});
 		}
 
-		else if (originalURL.match(/\.pdf\+html/) !== null) {
+		else if (originalquery.match(/\.pdf\+html/) !== null) {
 			try {
-				stripAPIurl = APIpre + originalURL.replace(/.pdf\+html/,'.pdf') + APIsuff;
-				bibliscript = document.createElement('script');
+				var stripAPIurl = APIpre + originalquery.replace(/.pdf\+html/,'.pdf') + APIsuff;
+				var bibliscript = document.createElement('script');
 				bibliscript.type = 'text/javascript';
 				bibliscript.src = stripAPIurl;
 				document.head.appendChild(bibliscript);
-				getAPA(info);
-				chrome.downloads.download({url: originalURL, filename: APAcite});
 			}
 			catch (e) {
-				chrome.downloads.download({url: originalURL});
+				chrome.downloads.download({url: originalquery});
 			}
 		}
 
-		else chrome.downloads.download({url: originalURL})
+		else chrome.downloads.download({url: originalquery})
 	}
 }
 
 function tabDL(){
+	APIpre = 'https://www.googleapis.com/scribe/v1/research?query=';
+	APIsuff = '&key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&callback=bibli';
+	SI_codes = [];
 	for (i=0;i<tabUrls.length;i++) {
 		if (tabUrls[i].indexOf('pdf')>-1) {
-			originalURL = tabUrls[i];
-			APIpre = 'https://www.googleapis.com/scribe/v1/research?query=';
-			APIsuff = '&key=AIzaSyDqVYORLCUXxSv7zneerIgC2UYMnxvPeqQ&callback=bibli';
+			var originalURL = tabUrls[i];
 			if (tabUrls[i].indexOf('ac.els-cdn.com')>-1) {
-				SIid = tabUrls[i].match(/ac.els-cdn.com\/(.*?)\//)[1];
-				SIurl = 'http://www.sciencedirect.com/science/article/pii/'+SIid;
-				queryUrl = SIurl;
+				var SIid = originalURL.match(/ac.els-cdn.com\/(.*?)\//)[1];
+				var SIurl = 'http://www.sciencedirect.com/science/article/pii/'+SIid;
+				var queryUrl = SIurl;
+				SI_codes.push([SIurl,tabUrls[i]]);
 			}
 			else queryUrl = tabUrls[i];
-			APIurl = APIpre + queryUrl + APIsuff;
+			var APIurl = APIpre + queryUrl + APIsuff;
 
-			bibliscript = document.createElement('script');
+			var bibliscript = document.createElement('script');
 			bibliscript.type = 'text/javascript';
 			bibliscript.src = APIurl;
 			document.head.appendChild(bibliscript);
