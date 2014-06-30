@@ -174,8 +174,8 @@ function urlGet(){
 	for (c=0;c<closers.length;c++) {
 		closers[c].querySelector('.close').addEventListener('click',function(e) {
 			if (document.querySelectorAll('#p').length > 1) {
-				var dataOrigin = this.parentNode.getAttribute('data-origin');
-				var urlIndex = tabUrls.indexOf(dataOrigin);
+				dataOrigin = this.parentNode.getAttribute('data-origin');
+				urlIndex = tabUrls.indexOf(dataOrigin);
 				if (urlIndex > -1) { tabUrls.splice(urlIndex, 1) }
 				else console.log("original URL not found in array - this shouldn't happen");
 				this.parentNode.nextSibling.remove();
@@ -196,11 +196,11 @@ function urlGet(){
 }
 
 function getAPA(data) {
-	var bibtree = JSON.parse(JSON.stringify(data));
-	var bibdata = bibtree.data[0].scholar[0];
-	var APAciteprep = bibdata.citedSources.citations[0].bibliographyText;
-	var APAcite = APAciteprep.substr(0,APAciteprep.indexOf(',')) + APAciteprep.substr(APAciteprep.indexOf('(')-1,7) + APAciteprep.substr(APAciteprep.indexOf(')')+2).substr(0, APAciteprep.substr(APAciteprep.indexOf(')')+2).indexOf('.'));
-	var APAcite = APAcite.replace('/','-');
+	bibtree = JSON.parse(JSON.stringify(data));
+	bibdata = bibtree.data[0].scholar[0];
+	APAciteprep = bibdata.citedSources.citations[0].bibliographyText;
+	APAcite = APAciteprep.substr(0,APAciteprep.indexOf(',')) + APAciteprep.substr(APAciteprep.indexOf('(')-1,7) + APAciteprep.substr(APAciteprep.indexOf(')')+2).substr(0, APAciteprep.substr(APAciteprep.indexOf(')')+2).indexOf('.'));
+	APAcite = APAcite.replace('/','-');
 }
 
 function bibli(info) {
@@ -224,20 +224,24 @@ else {
 	    doiRE = /\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\b/g;
 		if (originalquery.indexOf(doiRE)>-1) {
 			console.log(originalquery);
-			var possDOIurl = APIpre + doiRE.exec(originalquery)[1] + APIsuff;
-			var bibliscript = document.createElement('script');
+			possDOIurl = APIpre + doiRE.exec(originalquery)[1] + APIsuff;
+			bibliscript = document.createElement('script');
 			bibliscript.type = 'text/javascript';
 			bibliscript.src = possDOIurl;
 			document.head.appendChild(bibliscript);
+			getAPA(info);
+			chrome.downloads.download({url: originalquery, filename: APAcite});
 		}
 
 		else if (originalquery.match(/\.pdf\+html/) !== null) {
 			try {
-				var stripAPIurl = APIpre + originalquery.replace(/.pdf\+html/,'.pdf') + APIsuff;
-				var bibliscript = document.createElement('script');
+				stripAPIurl = APIpre + originalquery.replace(/.pdf\+html/,'.pdf') + APIsuff;
+				bibliscript = document.createElement('script');
 				bibliscript.type = 'text/javascript';
 				bibliscript.src = stripAPIurl;
 				document.head.appendChild(bibliscript);
+				getAPA(info);
+				chrome.downloads.download({url: originalquery, filename: APAcite});
 			}
 			catch (e) {
 				chrome.downloads.download({url: originalquery});
@@ -264,7 +268,7 @@ function tabDL(){
 			else queryUrl = tabUrls[i];
 			var APIurl = APIpre + queryUrl + APIsuff;
 
-			var bibliscript = document.createElement('script');
+			bibliscript = document.createElement('script');
 			bibliscript.type = 'text/javascript';
 			bibliscript.src = APIurl;
 			document.head.appendChild(bibliscript);
