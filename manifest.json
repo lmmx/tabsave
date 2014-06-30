@@ -4,7 +4,7 @@
   "name": "Tab Save",
   "description": "One-click download for files from open tabs, lists of URLs, or scholarly article PDFs from their associated DOI.",
 
-  "version": "1.4.0.1",
+  "version": "1.4.0.2",
   "icons": {
   	"16": "icon16.png",
 	"48": "icon48.png",
