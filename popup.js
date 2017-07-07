@@ -18,13 +18,13 @@ function isURL(str) { // URL checking RegEx courtesy of Matthew O'Riordan http:/
 	}
 }
 
-/* this crashes the extension upon use!
+/* this crashes the extension upon use! */
 function pasteIn(e) {
 	txt = document.querySelector('#txtin');
-	setTimeout(function(){
+	(function(){
 		temparray = [];
 		temparray.push(txt.value.replace(/,\s|\r|\f/g,'\n').replace(/\n{2,}/g,'\n').split('\n'));
-		for (k=temparray[0].length-1;k>=0;k++) {
+		for (k=temparray[0].length-1;k>=0;k--) {
 			if (temparray[0][k] != '') {
 				tabUrls.push(temparray[0][k])
 			}
@@ -50,9 +50,12 @@ function pasteIn(e) {
 				}
 			});
 		}
-	}, 0);
+	})();
 }
-*/
+
+
+
+/** /
 
 // the old one is recursive (adds items already added!)
 function pasteIn(e) {
@@ -79,7 +82,7 @@ function pasteIn(e) {
 	}
 	}, 0);
 }
-
+/**/
 function enterUp(e) {
 	if (e.keyCode === 13) {
 		pasteIn();
