@@ -12,8 +12,10 @@ function stylePop() {
 function isURL(str) { // URL checking RegEx courtesy of Matthew O'Riordan http://blog.mattheworiordan.com/post/13174566389/url-regular-expression-for-links-with-or-without-the
 	var pattern = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/g
 	if(!pattern.test(str)) {
+		document.querySelector('#error_msg').innerHTML = "<span style='color: red;'><b>ERROR URL</b>: " + str + " <b><u>IS NOT</u></b> a valid url .</span>";
 		return false;
 	} else {
+		document.querySelector('#error_msg').innerHTML = "";
 		return true;
 	}
 }
@@ -95,6 +97,7 @@ function doiinput() {
 }
 
 closeSVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 785.714 1000" preserveAspectRatio="xMinYMin meet" width="100%" height="100%"><path d="M724.284 737.74q0 22.32 -15.624 37.944l-75.888 75.888q-15.624 15.624 -37.944 15.624t-37.944 -15.624l-164.052 -164.052 -164.052 164.052q-15.624 15.624 -37.944 15.624t-37.944 -15.624l-75.888 -75.888q-15.624 -15.624 -15.624 -37.944t15.624 -37.944l164.052 -164.052 -164.052 -164.052q-15.624 -15.624 -15.624 -37.944t15.624 -37.944l75.888 -75.888q15.624 -15.624 37.944 -15.624t37.944 15.624l164.052 164.052 164.052 -164.052q15.624 -15.624 37.944 -15.624t37.944 15.624l75.888 75.888q15.624 15.624 15.624 37.944t-15.624 37.944l-164.052 164.052 164.052 164.052q15.624 15.624 15.624 37.944z"></path></svg>'
+
 /*
 function getpagelinks(target) {
 	targetTag = target;
@@ -111,9 +114,16 @@ function getpagelinks(target) {
 	} );
 }
 */
+
 function urlGet(){
 	tabUrls = [];
 	chrome.tabs.query({currentWindow: true}, function(tabs){
+	var download_delay = 0;
+	chrome.storage.sync.get({
+		downloadDelay: 0
+		}, function(items) {
+		download_delay = items.downloadDelay;
+	});
 	var div = document.createElement('div');
 	for (i=0;i<tabs.length;i++) {
 		tabUrls.push(tabs[i].url);
@@ -131,7 +141,8 @@ function urlGet(){
 	div.id = 'main';
 	document.body.appendChild(div);
 
-		
+
+	btn = document.createElement('button');
 	formsect = document.createElement('section');
 	editbtn = document.createElement('button');
 	editSVG = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 600 600" enable-background="new 0 0 600 600" xml:space="preserve" xmlns:xml="http://www.w3.org/XML/1998/namespace"><g xmlns="http://www.w3.org/2000/svg" transform="translate(700, 0) scale(-1, 1)"><path fill="#404040" d="M222.29,43.907c8.002,0,16.004,0,24.008,0c17.984,5.355,34.246,12.437,46.018,24.009 c-37.514,40.516-78.527,77.527-116.042,118.04c-14.398-9.606-19.908-28.114-26.006-46.017c0-8.005,0-16.008,0-24.011 C158.911,76.563,182.918,52.555,222.29,43.907z"></path><path fill="#404040" d="M322.325,101.928c66.083,59.522,129.868,127.868,196.07,194.071c20.882,20.882,50.497,41.409,64.025,64.023 c17.16,28.683,26.672,65.598,40.013,98.032c13.145,31.96,26.889,64.208,40.017,98.039c-33.778-13.111-66.171-26.906-98.034-40.019 c-32.584-13.395-69.32-22.832-98.037-40.013c-22.408-13.406-45.211-43.211-66.023-64.021 c-63.788-63.786-128.009-130.914-192.067-192.069C243.131,177.457,285.814,142.774,322.325,101.928z M524.398,418.042 c-26.342-11.761-47.98,8.89-48.018,36.017c38.498,14.85,74.458,32.241,114.037,46.012c5.916-5.428,13.42-9.254,16.01-18.006 c-14.952-37.733-30.96-74.41-46.02-112.039C533.29,370.06,512.638,391.702,524.398,418.042z"></path></g></svg>';
@@ -151,25 +162,26 @@ function urlGet(){
 	if (document.querySelector('#editbtn') !== null) {
 		document.querySelector('#editbtn').click();
 		doiinput();
-		}
+	}
 	else doiinput();
 	});
 	document.querySelector('#btnDL').addEventListener('click', function(e) {
-		tabDL();
+		setTimeout(function(){ tabDL(); }, 1000*download_delay);
 	})
+	
 	document.querySelector('#editbtn').addEventListener('click', function(e) {
-	textarea = document.createElement('textarea');
-	textarea.id = 'txtin'
-	edHead = document.createElement('h1');
-	edHead.innerHTML = 'Enter your download links';
-	div.childNodes[0].outerHTML = edHead.outerHTML;
-	div.childNodes[1].outerHTML = textarea.outerHTML;
+		textarea = document.createElement('textarea');
+		textarea.id = 'txtin'
+		edHead = document.createElement('h1');
+		edHead.innerHTML = 'Enter your download links';
+		div.childNodes[0].outerHTML = edHead.outerHTML;
+		div.childNodes[1].outerHTML = textarea.outerHTML;
 
-	document.querySelector('textarea').addEventListener('paste', pasteIn);
-	document.querySelector('textarea').addEventListener('keyup', enterUp);
-	this.remove();
-	tabUrls = [];
-	document.querySelector('textarea').focus();
+		document.querySelector('textarea').addEventListener('paste', pasteIn);
+		document.querySelector('textarea').addEventListener('keyup', enterUp);
+		this.remove();
+		tabUrls = [];
+		document.querySelector('textarea').focus();
 	});
 	document.querySelector('#btnDL').focus();
 
@@ -194,6 +206,9 @@ function urlGet(){
 			this.setAttribute('contenteditable','true');
 		})
 	}
+	errorMsgBox = document.createElement('div');
+	errorMsgBox.id = 'error_msg';
+	document.body.appendChild(errorMsgBox);
 });
 
 }
