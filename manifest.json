@@ -1,10 +1,13 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Tab Save",
   "description": "One-click download for files from open tabs, lists of URLs, or scholarly article PDFs from their associated DOI.",
 
-  "version": "1.4.0.2",
+  "version": "1.4.1.0",
+  "permissions": [
+    "storage","downloads", "tabs", "<all_urls>"
+  ],
   "icons": {
   	"16": "icon16.png",
 	"48": "icon48.png",
@@ -20,9 +23,8 @@
 	"omnibox": {
 		"keyword": "tabsave"
 	},
-  "permissions": [
-    "downloads", "tabs", "<all_urls>"
-  ],
+
   "content_security_policy": "script-src 'self' https://www.googleapis.com; object-src 'self'",
   "options_page": "options.html"
+  
 }
